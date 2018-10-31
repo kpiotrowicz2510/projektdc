@@ -1,0 +1,46 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div  style="background-color:lavender;" class="container-fluid">
+  
+  <h2 class="text-info">
+	  <img src="img/logo.png" class="img-rounded" alt="logo" width="91" height="70"> 
+	  Hurtownia kaktusów
+  </h2>
+
+    <div class="row">
+		<div class="col-sm-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+				
+				<h4><span class="glyphicon glyphicon-envelope"></span> Zgłoszenia  </h4>
+				
+				</div>
+				<div class="panel-body" style="max-height: 400px;overflow-y: scroll;">
+					<div class="list-group">
+						<app-list-of-mails></app-list-of-mails> <!-- PIERWSZY KOMPONENT-->
+					</div>
+				</div>
+				<div class="panel-footer">
+					<app-footer-list-of-mails></app-footer-list-of-mails> <!-- DRUGI KOMPONENT-->
+				</div>
+			</div>
+		</div>
+	
+		<div class="col-sm-8">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h4>Treść</h4>
+				</div>
+				<div class="panel-body" style="height: 400px;overflow-y: scroll;">
+					<app-mail-content></app-mail-content> <!-- TRZECI KOMPONENT-->
+				</div>
+				<div class="panel-footer">
+					<app-footer-mail-content></app-footer-mail-content> <!-- CZWARTY KOMPONENT-->
+				</div>
+			</div>
+		</div>   
+   	</div>
+  
+ <app-notification></app-notification> <!-- PIĄTY KOMPONENT alerty-->
+  
+</div>
+

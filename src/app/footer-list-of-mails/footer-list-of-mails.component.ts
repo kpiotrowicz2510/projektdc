@@ -11,4 +11,12 @@ export class FooterListOfMailsComponent implements OnInit {
   ngOnInit() {
   }
 
+  acceptOffer() {
+
+  }
+
+  denyOffer() {
+
+  }
+
 }

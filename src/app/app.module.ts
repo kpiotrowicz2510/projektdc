@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListOfMailsComponent } from './list-of-mails/list-of-mails.component';
@@ -20,7 +22,8 @@ import { NotificationComponent } from './notification/notification.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+      AppRoutingModule,
+     HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

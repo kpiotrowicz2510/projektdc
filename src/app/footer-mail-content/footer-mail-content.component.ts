@@ -11,4 +11,16 @@ export class FooterMailContentComponent implements OnInit {
   ngOnInit() {
   }
 
+  passFurther() {
+
+  }
+
+  addComment() {
+
+  }
+
+  finishProcess() {
+    
+  }
+
 }

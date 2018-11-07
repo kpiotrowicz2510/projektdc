@@ -1,3 +1,4 @@
+import { HttpRESTClientService } from './http-REST-client/http-REST-client.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -25,7 +26,7 @@ import { NotificationComponent } from './notification/notification.component';
       AppRoutingModule,
      HttpClientModule,
   ],
-  providers: [],
+  providers: [HttpRESTClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

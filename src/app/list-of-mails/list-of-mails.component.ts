@@ -13,43 +13,43 @@ export class ListOfMailsComponent implements OnInit {
 	
     this.listOfMails.push({
         "title": "title1",
-        "from": "jan.kowalski@gmail.com"
+        "from": "jan.kowalski@gmail.com",
       "active": ""
       });
 
       this.listOfMails.push({
         "title": "title2",
-        "from": "jan.kowalski@gmail.com"
+        "from": "jan.kowalski@gmail.com",
       "active": ""
       });
 
       this.listOfMails.push({
         "title": "title3",
-        "from": "jan.kowalski@gmail.com"
+        "from": "jan.kowalski@gmail.com",
       "active": ""
       });
 
       this.listOfMails.push({
         "title": "title4",
-        "from": "jan.kowalski@gmail.com"
+        "from": "jan.kowalski@gmail.com",
       "active": ""
       });
 
       this.listOfMails.push({
         "title": "title5",
-        "from": "jan.kowalski@gmail.com"
+        "from": "jan.kowalski@gmail.com",
       "active": ""
       });
 
       this.listOfMails.push({
         "title": "title6",
-        "from": "jan.kowalski@gmail.com"
+        "from": "jan.kowalski@gmail.com",
       "active": ""
       });
 
       this.listOfMails.push({
         "title": "title7",
-        "from": "jan.kowalski@gmail.com"
+        "from": "jan.kowalski@gmail.com",
       "active": ""
       });
   

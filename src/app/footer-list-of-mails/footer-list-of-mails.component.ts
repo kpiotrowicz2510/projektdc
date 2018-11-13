@@ -7,17 +7,17 @@ import { HttpRESTClientService } from '../http-REST-client/http-REST-client.serv
   templateUrl: './footer-list-of-mails.component.html'
 })
 export class FooterListOfMailsComponent implements OnInit {
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpRESTClientService) { }
 
   ngOnInit() {
   }
 
   acceptOffer() {
-    this.httpClient.post('/process/start', {}).subscribe();
+    this.httpClient.post_start_task('').subscribe();
   }
 
   denyOffer() {
-    this.httpClient.post('/process/complete/1', {}).subscribe();
+    this.httpClient.post_complete_task(1, '').subscribe();
   }
 
 }

@@ -3,11 +3,11 @@
 <div class="btn-group btn-group-justified">
 	<a *ngIf="odrzuc" (click)="pokazUzasadnienie()" href="#" class="btn btn-primary">Odrzuć</a>
 	<a *ngIf="zmien" (click)="pokazWrzuc()" href="#" class="btn btn-primary">Zmień</a>
-	<a *ngIf="zatwierdz" href="#" class="btn btn-primary">Zatwierdź</a>
+	<a *ngIf="zatwierdz" (click)="passFurther()" href="#" class="btn btn-primary">Zatwierdź</a>
 </div>
 
-<input *ngIf="uzasadnienieOdrzucenia" type="text" size="35">
+<input *ngIf="uzasadnienieOdrzucenia" id="uzasadnienieOdrzuceniaField" type="text" size="35">
 
 <div class="btn-group btn-group-justified">
-	<a *ngIf="zakoncz" href="#" class="btn btn-primary">Zakończ</a>
+	<a *ngIf="zakoncz" href="#" (click)="finishProcess()" class="btn btn-primary">Zakończ</a>
 </div>

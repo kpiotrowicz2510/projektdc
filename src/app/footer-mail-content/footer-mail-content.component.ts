@@ -14,7 +14,7 @@ export class FooterMailContentComponent implements OnInit {
 // 3) dodawania produktu Pracownik 2,3   ---> "dodawania"
 // 4) zatwierdzania Pracownik 1          ---> "zatwierdzania"
   
-  private etap = "decyzji";
+  private etap = "przygotowania";
   
   public odrzuc = false;
   public uzasadnienieOdrzucenia = false;
@@ -23,19 +23,9 @@ export class FooterMailContentComponent implements OnInit {
   public wrzuc = false;
   public zatwierdz = false;
   
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpRESTClientService) { }
 
-  pokazUzasadnienie = function(){
-	  this.uzasadnienieOdrzucenia = true;
-	  this.zakoncz = true;
-	  this.zatwierdz = false;
-	  	  
-  }
   
-  pokazWrzuc = function(){
-	  this.wrzuc = true;
-
-  }
   
   ngOnInit() {
     if(this.etap == 'decyzji'){
@@ -54,15 +44,35 @@ export class FooterMailContentComponent implements OnInit {
   }
 
   passFurther() {
-    this.httpClient.post('http://localhost:8080/activiti-service/api/process/complete/1', {}).subscribe();
+    this.httpClient.post_complete_task(1, '').subscribe();
   }
 
-  addComment() {
-    this.httpClient.post('http://localhost:8080/activiti-service/api/process/1/document', {}).subscribe();
+  addComment(comment) {
+    const taskObj = { Comment: comment };
+    this.httpClient.put_task(1, JSON.stringify(taskObj)).subscribe();
   }
 
   finishProcess() {
-    this.httpClient.post('http://localhost:8080/activiti-service/api/process/complete/1', {}).subscribe();
+    const comment = (<HTMLInputElement>document.getElementById('uzasadnienieOdrzuceniaField')).value;
+    this.addComment(comment);
+    this.httpClient.post_complete_task(1, '').subscribe();
+  }
+
+  pokazUzasadnienie(comment) {
+    this.uzasadnienieOdrzucenia = true;
+	  this.zakoncz = true;
+	  this.zatwierdz = false;
+  }
+  
+  pokazWrzuc() {
+	  this.wrzuc = true;
+
+  }
+
+  handleUpload(fileInput) {
+    if (fileInput.target.files && fileInput.target.files[0]) {
+      this.httpClient.post_doc_task(1, fileInput.target.files, '').subscribe();
+    }
   }
 
 }

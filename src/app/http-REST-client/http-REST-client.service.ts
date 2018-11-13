@@ -14,7 +14,7 @@ export class HttpRESTClientService {
         return this.http.get(this.url + '/process/tasks');
     }
 
-    post_complete_task(index: number,body:string) {
+    post_complete_task(index: number, body: string) {
         return this.http.post(this.url + '/process/complete/' + index, body);
     }
 

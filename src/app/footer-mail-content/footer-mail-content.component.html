@@ -1,5 +1,13 @@
+<input *ngIf="wrzuc" type="file" (change)="handleUpload($event)" href="#" class="btn btn-primary">
+
 <div class="btn-group btn-group-justified">
-	<a href="#" (click)="passFurther()" class="btn btn-success">Przekaz dalej</a>
-	<a href="#" (click)="addComment()" class="btn btn-primary">Dodaj komentarz</a>
-	<a href="#" (click)="finishProcess()" class="btn btn-danger">Zakoncz proces</a>
+	<a *ngIf="odrzuc" (click)="pokazUzasadnienie()" href="#" class="btn btn-primary">Odrzuć</a>
+	<a *ngIf="zmien" (click)="pokazWrzuc()" href="#" class="btn btn-primary">Zmień</a>
+	<a *ngIf="zatwierdz" href="#" class="btn btn-primary">Zatwierdź</a>
+</div>
+
+<input *ngIf="uzasadnienieOdrzucenia" type="text" size="35">
+
+<div class="btn-group btn-group-justified">
+	<a *ngIf="zakoncz" href="#" class="btn btn-primary">Zakończ</a>
 </div>

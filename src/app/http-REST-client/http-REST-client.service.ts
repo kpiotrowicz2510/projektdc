@@ -13,6 +13,37 @@ export class HttpRESTClientService {
         return this.http.get(this.url + '/process/tasks');
     }
 
+    post_complete_task(index: number,body:string) {
+        return this.http.post(this.url + '/process/complete/' + index, body);
+    }
+
+    put_task(index: number, body: string) {
+        return this.http.put(this.url + '/process/' + index, body);
+    }
+
+    post_start_task(body: string) {
+        return this.http.post(this.url + '/process/start',body);
+    }
+
+    get_doc_task(index: number, docIndex: number) {
+        return this.http.get(this.url + '/process/' + index + '/document/' + docIndex);
+    }
+
+    post_doc_task(index: number,files, body) {
+        const options = {} as any; // Set any options you like
+        const formData = new FormData();
+
+        for (const file of files) {
+            formData.append(file.name, file)
+        }
+
+        Object.keys(body).forEach(key => {
+            formData.append(key, body[key]);
+        });
+
+        return this.http.post(this.url + '/process/' + index + '/document', formData);
+    }
+
     http_get(inUrl: string) {
         return this.http.get(this.url + inUrl);
     }
@@ -24,6 +55,7 @@ export class HttpRESTClientService {
     http_put(inUrl: string, body: any) {
         this.http.put(this.url + inUrl, body);
     }
+
 
 
 }

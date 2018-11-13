@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Http, Headers } from '@angular/http';
+import { saveAs } from 'file-saver';
 @Injectable({
     providedIn: 'root',
 })
@@ -26,7 +27,17 @@ export class HttpRESTClientService {
     }
 
     get_doc_task(index: number, docIndex: number) {
-        return this.http.get(this.url + '/process/' + index + '/document/' + docIndex);
+        const headers = new HttpHeaders();
+        headers.append('Accept', 'application/pdf');
+        return this.http.get(this.url + '/process/' + index + '/document/' + docIndex, { headers}).toPromise().then(response => this.saveToFileSystem(response));
+    }
+
+    private saveToFileSystem(response) {
+        const contentDispositionHeader: string = response.headers.get('Content-Disposition');
+        const parts: string[] = contentDispositionHeader.split(';');
+        const filename = parts[1].split('=')[1];
+        const blob = new Blob([response._body], { type: 'application/pdf' });
+        saveAs(blob, filename);
     }
 
     post_doc_task(index: number,files, body) {

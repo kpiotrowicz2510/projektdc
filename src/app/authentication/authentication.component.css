@@ -1,0 +1,13 @@
+.auth-container {
+    float: right;
+    margin: 20px 15px 10px 0;
+}
+
+.logout-button {
+    margin-left: 10px;
+
+}
+
+.login-button {
+    float: right;
+}

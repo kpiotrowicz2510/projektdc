@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpRESTClientService } from '../http-REST-client/http-REST-client.service';
+import { Task } from '../models/Task';
 
 @Component({
   selector: 'app-list-of-mails',
@@ -6,56 +8,38 @@ import { Component, OnInit } from '@angular/core';
   
 })
 export class ListOfMailsComponent implements OnInit {
-   
+   private tasks;  
   listOfMails: any[] = [];
 
-  constructor() {
-	
+  constructor(private httpClient: HttpRESTClientService) {
+    
+    this.httpClient.get_tasks().subscribe((data: Task) => this.tasks = {
+      taskDefinitionKey: data['taskDefinitionKey'],
+      taskId:  data['taskId'],
+      taskVariables: data['taskVariables'],
+      processVariables: data['processVariables']
+  });
+
+  console.log(this.tasks);
+
+  //TODO: DODAC WRZUCANIE NA LISTE
+  /*
+  this.tasks.forEach(element => {
     this.listOfMails.push({
-        "title": "title1",
-        "from": "jan.kowalski@gmail.com",
-      "active": ""
-      });
-
-      this.listOfMails.push({
-        "title": "title2",
-        "from": "jan.kowalski@gmail.com",
-      "active": ""
-      });
-
-      this.listOfMails.push({
-        "title": "title3",
-        "from": "jan.kowalski@gmail.com",
-      "active": ""
-      });
-
-      this.listOfMails.push({
-        "title": "title4",
-        "from": "jan.kowalski@gmail.com",
-      "active": ""
-      });
-
-      this.listOfMails.push({
-        "title": "title5",
-        "from": "jan.kowalski@gmail.com",
-      "active": ""
-      });
-
-      this.listOfMails.push({
-        "title": "title6",
-        "from": "jan.kowalski@gmail.com",
-      "active": ""
-      });
-
-      this.listOfMails.push({
-        "title": "title7",
-        "from": "jan.kowalski@gmail.com",
-      "active": ""
-      });
+      "title": "",
+      "taskId":5,
+      "from": "jan.kowalski@gmail.com",
+    "active": ""
+    });
+  });
+*/
+  
   
   }
 
   selectMail = function(mail){  
+
+    sessionStorage.setItem('taskId', mail.taskId);
 	
     for (let i in this.listOfMails) {
       this.listOfMails[i].active = "";

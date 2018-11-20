@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpRESTClientService } from './../http-REST-client/http-REST-client.service';
 import { Component, OnInit } from '@angular/core';
+import { Task } from '../models/Task';
 
 @Component({
   selector: 'app-footer-mail-content',
   templateUrl: './footer-mail-content.component.html'
 })
+
 export class FooterMailContentComponent implements OnInit {
   
 //etap
@@ -22,12 +24,16 @@ export class FooterMailContentComponent implements OnInit {
   public zmien = false;
   public wrzuc = false;
   public zatwierdz = false;
+  public tasks;
+  public taskId;
   
   constructor(private httpClient: HttpRESTClientService) { }
 
   
   
   ngOnInit() {
+    this.taskId = sessionStorage.getItem('taskId');
+
     if(this.etap == 'decyzji'){
 			this.odrzuc = true; //-> uzasadnienie + zakoncz
 			this.zatwierdz = true;
@@ -44,18 +50,18 @@ export class FooterMailContentComponent implements OnInit {
   }
 
   passFurther() {
-    this.httpClient.post_complete_task(1, '').subscribe();
+    this.httpClient.post_complete_task(1, {}).subscribe();
   }
 
   addComment(comment) {
     const taskObj = { Comment: comment };
-    this.httpClient.put_task(1, JSON.stringify(taskObj)).subscribe();
+    this.httpClient.put_task(1, taskObj).subscribe();
   }
 
   finishProcess() {
     const comment = (<HTMLInputElement>document.getElementById('uzasadnienieOdrzuceniaField')).value;
     this.addComment(comment);
-    this.httpClient.post_complete_task(1, '').subscribe();
+    this.httpClient.post_complete_task(1, {}).subscribe();
   }
 
   pokazUzasadnienie(comment) {

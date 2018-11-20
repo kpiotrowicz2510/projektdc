@@ -6,25 +6,29 @@ import { callbackify } from 'util';
 @Injectable({
     providedIn: 'root',
 })
+
+
 export class HttpRESTClientService {
     url: string = 'http://localhost:8080/activiti-service/api';
    
    constructor(private http: HttpClient) { }
 
     get_tasks() {
-        return this.http.get(this.url + '/process/tasks');
+        return this.http.get(this.url + '/process/tasks', {headers: {'client-key': sessionStorage.getItem('client-id')}});
     }
 
-    post_complete_task(index: number, body: string) {
+    post_complete_task(index: number, body: any) {
         return this.http.post(this.url + '/process/complete/' + index, body);
     }
 
-    put_task(index: number, body: string) {
+    put_task(index: number, body: any) {
         return this.http.put(this.url + '/process/' + index, body);
     }
 
-    post_start_task(body: string) {
-        return this.http.post(this.url + '/process/start',body);
+    post_start_task(body: any) {
+        const headers = new HttpHeaders();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.url + '/process/start', body, {headers});
     }
 
     get_doc_task(index: number, docIndex: number) {

@@ -7,6 +7,6 @@
     </form>
   </div>
   <div class="login-container" *ngIf="clientIdSet">
-    Zalogowany jako <b>{{ loginData.login }}</b><button class="btn btn-primary logout-button" (click)="logout()">Wyloguj</button>
+    Zalogowany jako <b id="userName">{{ loginData.login }}</b><button class="btn btn-primary logout-button" (click)="logout()">Wyloguj</button>
   </div>
 </div>

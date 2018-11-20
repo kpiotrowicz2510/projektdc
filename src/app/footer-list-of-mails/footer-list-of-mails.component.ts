@@ -13,11 +13,12 @@ export class FooterListOfMailsComponent implements OnInit {
   }
 
   acceptOffer() {
-    this.httpClient.post_start_task('').subscribe();
+    const userName = sessionStorage.getItem('user-name');
+    this.httpClient.post_start_task({"decision":"ACCEPT", "assignee":userName}).subscribe();
   }
 
   denyOffer() {
-    this.httpClient.post_complete_task(1, '').subscribe();
+    this.httpClient.post_complete_task(1, {"decision":"REJECT"}).subscribe();
   }
 
 }

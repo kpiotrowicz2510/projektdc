@@ -1,0 +1,12 @@
+<div class="auth-container">
+  <div class="login-container" *ngIf="!clientIdSet">
+    <form>
+      <input type="text" [(ngModel)]="loginData.login" placeholder="login" name="login" class="form-control" />
+      <input type="password" [(ngModel)]="loginData.password" placeholder="hasło" name="password" class="form-control" /><br />
+      <input type="submit" (click)="authenticate();" value="Zaloguj się" class="btn btn-primary login-button" />
+    </form>
+  </div>
+  <div class="login-container" *ngIf="clientIdSet">
+    Zalogowany jako <b>{{ loginData.login }}</b><button class="btn btn-primary logout-button" (click)="logout()">Wyloguj</button>
+  </div>
+</div>

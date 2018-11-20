@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http, Headers } from '@angular/http';
 import { saveAs } from 'file-saver';
+import { callbackify } from 'util';
 @Injectable({
     providedIn: 'root',
 })
@@ -55,12 +56,18 @@ export class HttpRESTClientService {
         return this.http.post(this.url + '/process/' + index + '/document', formData);
     }
 
-    http_get(inUrl: string) {
-        return this.http.get(this.url + inUrl);
+    http_get(inUrl: string, callback) {
+        return this.http.get(this.url + inUrl).subscribe(
+            res => callback(res),
+            error => console.error(error)
+        );
     }
 
-    http_post(inUrl: string, body: any) {
-        this.http.post(this.url + inUrl, body);
+    http_post(inUrl: string, body: any, callback) {
+        this.http.post(this.url + inUrl, body).subscribe(
+            res => { callback(res) },
+            error => { console.error(error) },
+        );
     }
 
     http_put(inUrl: string, body: any) {

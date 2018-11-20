@@ -1,4 +1,4 @@
-<a href="#" class="list-group-item {{mail.active}}" *ngFor = 'let mail of listOfMails' (click)="selectMail(mail)">
-	<h4 class="list-group-item-heading">{{mail.title}}</h4>
-	<p class="list-group-item-text">{{mail.from}}</p>
+<a href="#" class="list-group-item {{task.active}}" *ngFor = 'let task of tasks' (click)="selectMail(task)">
+	<h4 class="list-group-item-heading">{{task.taskDefinitionKey}}</h4>
+	<p class="list-group-item-text">{{task.taskId}}</p>
 </a>

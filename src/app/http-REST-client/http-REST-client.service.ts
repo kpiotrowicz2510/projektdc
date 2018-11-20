@@ -10,7 +10,8 @@ import { callbackify } from 'util';
 
 export class HttpRESTClientService {
     url: string = 'http://localhost:8080/activiti-service/api';
-   
+    
+   public currentTaskId = 1;
    constructor(private http: HttpClient) { }
 
     get_tasks() {

@@ -18,7 +18,8 @@ export class FooterListOfMailsComponent implements OnInit {
   }
 
   denyOffer() {
-    this.httpClient.post_complete_task(1, {"decision":"REJECT"}).subscribe();
+    const taskId = sessionStorage.getItem('taskId');
+    this.httpClient.post_complete_task(taskId, {"decision":"REJECT"}).subscribe();
   }
 
 }

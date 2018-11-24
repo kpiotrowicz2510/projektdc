@@ -1,3 +1,5 @@
+<div *ngIf="displayLoading" align='center'><br>Wczytywanie ...</div> 
+
 <a href="#" class="list-group-item {{task.active}}" *ngFor = 'let task of tasks' (click)="selectMail(task)">
 	<h4 class="list-group-item-heading">{{task.taskDefinitionKey}}</h4>
 	<p class="list-group-item-text">{{task.taskId}}</p>

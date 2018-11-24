@@ -11,18 +11,18 @@ import { callbackify } from 'util';
 export class HttpRESTClientService {
     url: string = 'http://localhost:8080/activiti-service/api';
     
-   public currentTaskId = 1;
+   public currentTaskId = "1";
    constructor(private http: HttpClient) { }
 
     get_tasks() {
         return this.http.get(this.url + '/process/tasks', {headers: {'client-key': sessionStorage.getItem('client-id')}});
     }
 
-    post_complete_task(index: number, body: any) {
+    post_complete_task(index: string, body: any) {
         return this.http.post(this.url + '/process/complete/' + index, body);
     }
 
-    put_task(index: number, body: any) {
+    put_task(index: string, body: any) {
         return this.http.put(this.url + '/process/' + index, body);
     }
 
@@ -32,7 +32,7 @@ export class HttpRESTClientService {
         return this.http.post(this.url + '/process/start', body, {headers});
     }
 
-    get_doc_task(index: number, docIndex: number) {
+    get_doc_task(index: string, docIndex: number) {
         const headers = new HttpHeaders();
         headers.append('Accept', 'application/pdf');
         return this.http.get(this.url + '/process/' + index + '/document/' + docIndex, { headers}).toPromise().then(response => this.saveToFileSystem(response));
@@ -46,7 +46,7 @@ export class HttpRESTClientService {
         saveAs(blob, filename);
     }
 
-    post_doc_task(index: number,files, body) {
+    post_doc_task(index: string,files, body) {
         const options = {} as any; // Set any options you like
         const formData = new FormData();
 

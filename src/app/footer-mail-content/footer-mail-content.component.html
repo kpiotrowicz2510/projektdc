@@ -4,6 +4,10 @@
 	<a *ngIf="odrzuc" (click)="pokazUzasadnienie()" href="#" class="btn btn-primary">Odrzuć</a>
 	<a *ngIf="zmien" (click)="pokazWrzuc()" href="#" class="btn btn-primary">Zmień</a>
 	<a *ngIf="zatwierdz" (click)="passFurther()" href="#" class="btn btn-primary">Zatwierdź</a>
+	<a *ngIf="pobierz" (click)="downloadFile()" href="#" class="btn btn-primary">Pobierz plik</a>
+	<a *ngIf="pobierzExcel" (click)="downloadOrderFile()" href="#" class="btn btn-primary">Pobierz plik</a>
+	<a *ngIf="pobierzLastStep" (click)="downloadFileMerged()" href="#" class="btn btn-primary">Pobierz scalony plik</a>
+	<a *ngIf="zatwierdz" (click)="passFurther()" href="#" class="btn btn-primary">Zatwierdź</a>
 </div>
 
 <input *ngIf="uzasadnienieOdrzucenia" id="uzasadnienieOdrzuceniaField" type="text" size="35">

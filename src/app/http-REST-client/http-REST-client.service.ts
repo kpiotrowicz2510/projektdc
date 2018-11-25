@@ -61,6 +61,36 @@ export class HttpRESTClientService {
         return this.http.post(this.url + '/process/' + index + '/document', formData);
     }
 
+    post_doc_initial_task(index: string,files, body) {
+        const options = {} as any; // Set any options you like
+        const formData = new FormData();
+
+        for (const file of files) {
+            formData.append(file.name, file)
+        }
+
+        Object.keys(body).forEach(key => {
+            formData.append(key, body[key]);
+        });
+
+        return this.http.post(this.url + '/process/' + index + '/initDocument', formData);
+    }
+
+    getInitialFile(){
+        //TODO
+        return this.http.get(this.url + '/process/');
+    }
+
+    getOrderFile(){
+        //TODO
+        return this.http.get(this.url + '/process/');
+    }
+
+    getMergedExcel(taskId: number){
+        //TODO
+        return this.http.get(this.url + '/process/');
+    }
+
     http_get(inUrl: string, callback) {
         return this.http.get(this.url + inUrl).subscribe(
             res => callback(res),

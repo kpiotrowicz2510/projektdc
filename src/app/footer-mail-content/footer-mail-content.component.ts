@@ -25,6 +25,9 @@ export class FooterMailContentComponent implements OnInit{
   public zmien = false;
   public wrzuc = false;
   public zatwierdz = false;
+  public pobierz = false;
+  public pobierzExcel = false;
+  public pobierzLastStep = false;
   public tasks;
   public taskId;
   public taskState;
@@ -39,14 +42,18 @@ export class FooterMailContentComponent implements OnInit{
 			this.odrzuc = true; //-> uzasadnienie + zakoncz
 			this.zatwierdz = true;
 			
-		} else if (this.taskState === 'przygotowanie' || this.taskState === 'usertask4'){
+		} else if (this.taskState === 'przygotowanie'){
+      this.wrzuc = true;
+      this.zatwierdz = true;
+      this.pobierz = true;
+    } else if(this.taskState === 'usertask4'){
 			this.wrzuc = true;
-			this.zatwierdz = true;
-			
+      this.zatwierdz = true;
+      this.pobierzExcel = true;
 		}else if (this.taskState === 'zatwierdzania'){
 			this.zmien = true; //-> wrzuc
-			this.zatwierdz = true;
-			
+      this.zatwierdz = true;
+      this.pobierzLastStep = true;
 		}
   }
 
@@ -95,9 +102,30 @@ export class FooterMailContentComponent implements OnInit{
 
   }
 
+  downloadFile(){
+    this.httpClient.getInitialFile().subscribe();
+  }
+
+  downloadOrderFile(){
+    this.httpClient.getOrderFile().subscribe();
+  }
+
+  downloadFileMerged(){
+    this.httpClient.getMergedExcel(this.taskId).subscribe();
+  }
+
   handleUpload(fileInput) {
+
+    if(this.taskState === 'przygotowanie'){
+    if (fileInput.target.files && fileInput.target.files[0]) {
+      this.httpClient.post_doc_initial_task(this.taskId, fileInput.target.files, {}).subscribe();
+    }
+  }
+
+  if(this.taskState === 'usertask4'){
     if (fileInput.target.files && fileInput.target.files[0]) {
       this.httpClient.post_doc_task(this.taskId, fileInput.target.files, {}).subscribe();
     }
+  }
   }  
 }

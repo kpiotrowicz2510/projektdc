@@ -58,14 +58,17 @@ export class FooterMailContentComponent implements OnInit{
     const userName = sessionStorage.getItem('user-name');
     let taskObject;
 
-    if (this.taskState === 'przygotowania') {
+    if (this.taskState === 'przygotowanie') {
       taskObject = {'decision': 'ACCEPT', 'assignee': userName, 'categories': this.getCategories()};
     }else{
       taskObject = {'decision': 'ACCEPT', 'assignee': userName};
     }
 
-    this.httpClient.post_complete_task(this.taskId, taskObject).subscribe();
-    window.location.reload();
+    this.httpClient.post_complete_task(this.taskId, taskObject).subscribe(
+    function(){
+      window.location.reload();
+    }
+    );
   }
 
   addComment(comment) {
@@ -76,8 +79,9 @@ export class FooterMailContentComponent implements OnInit{
   finishProcess() {
     const comment = (<HTMLInputElement>document.getElementById('uzasadnienieOdrzuceniaField')).value;
     this.addComment(comment);
-    this.httpClient.post_complete_task(this.taskId, {"decision":"REJECT"}).subscribe();
-    window.location.reload();
+    this.httpClient.post_complete_task(this.taskId, {"decision":"REJECT"}).subscribe(function(){
+      window.location.reload();
+    });
   }
 
   pokazUzasadnienie(comment) {

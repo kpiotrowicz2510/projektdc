@@ -78,17 +78,17 @@ export class HttpRESTClientService {
 
     getInitialFile(){
         //TODO
-        return this.http.get(this.url + '/process/');
+        return this.http.get(this.url + '/templates/initial');
     }
 
     getOrderFile(){
         //TODO
-        return this.http.get(this.url + '/process/');
+        return this.http.get(this.url + '/templates/order');
     }
 
     getMergedExcel(taskId: number){
         //TODO
-        return this.http.get(this.url + '/process/');
+        return this.http.get(this.url + '/process/' + taskId+'/mergedExcel');
     }
 
     http_get(inUrl: string, callback) {

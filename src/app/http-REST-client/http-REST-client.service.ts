@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, ResponseContentType, RequestOptions } from '@angular/http';
 import { saveAs } from 'file-saver';
 import { callbackify } from 'util';
 @Injectable({
@@ -76,12 +76,23 @@ export class HttpRESTClientService {
 
     getInitialFile(){
         //TODO
-        return this.http.get(this.url + '/templates/initial');
+        let headers= new HttpHeaders({
+            'Content-Type': 'application/octet-stream',
+            'Accept': 'application/octet-stream'
+        })
+      
+      
+        return this.http.get(this.url + '/templates/initial', { headers: headers, responseType: 'blob' });
+       
     }
-
+   
     getOrderFile(){
         //TODO
-        return this.http.get(this.url + '/templates/order');
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/octet-stream',
+            'Accept': 'application/octet-stream'
+        })
+        return this.http.get(this.url + '/templates/order', { headers: headers, responseType: 'blob' });
     }
 
     getMergedExcel(taskId: number){

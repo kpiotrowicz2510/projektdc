@@ -103,11 +103,42 @@ export class FooterMailContentComponent implements OnInit{
   }
 
   downloadFile(){
-    this.httpClient.getInitialFile().subscribe();
+      this.httpClient.getInitialFile().subscribe(response => {
+          let ieEDGE = navigator.userAgent.match(/Edge/g);
+          let ie = navigator.userAgent.match(/.NET/g); // IE 11+
+          let oldIE = navigator.userAgent.match(/MSIE/g); 
+          const blob = new Blob([response], { type: "application/octet-stream" })
+          let fileName: string = "TemplateInitial.xls";
+          if (ie || oldIE || ieEDGE) {
+              window.navigator.msSaveBlob(blob, fileName);
+          }
+          else {
+              let link = document.createElement('a');
+              link.href = window.URL.createObjectURL(blob);
+              link.download = fileName;
+              link.click();
+          }
+      });
   }
 
   downloadOrderFile(){
-    this.httpClient.getOrderFile().subscribe();
+      this.httpClient.getOrderFile().subscribe(response => {
+          let ieEDGE = navigator.userAgent.match(/Edge/g);
+          let ie = navigator.userAgent.match(/.NET/g); // IE 11+
+          let oldIE = navigator.userAgent.match(/MSIE/g); 
+
+          const blob = new Blob([response], { type: "application/octet-stream" })
+          let fileName: string = "TemplateOrder.xls";
+          if (ie || oldIE || ieEDGE) {
+              window.navigator.msSaveBlob(blob, fileName);
+          }
+          else {
+              let link = document.createElement('a');
+              link.href = window.URL.createObjectURL(blob);
+              link.download = fileName;
+              link.click();
+          }
+      });
   }
 
   downloadFileMerged(){

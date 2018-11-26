@@ -19,17 +19,15 @@ export class HttpRESTClientService {
     }
 
     post_complete_task(index: string, body: any) {
-        return this.http.post(this.url + '/process/complete/' + index, body);
+        return this.http.post(this.url + '/process/complete/' + index, body, {headers: {'client-key': sessionStorage.getItem('client-id')}});
     }
 
     put_task(index: string, body: any) {
-        return this.http.put(this.url + '/process/' + index, body);
+        return this.http.put(this.url + '/process/' + index, body, {headers: {'client-key': sessionStorage.getItem('client-id')}});
     }
 
     post_start_task(body: any) {
-        const headers = new HttpHeaders();
-        headers.append('Content-Type', 'application/json');
-        return this.http.post(this.url + '/process/start', body, {headers});
+        return this.http.post(this.url + '/process/start', body, {headers: {'Content-Type': 'application/json', 'client-key': sessionStorage.getItem('client-id')}});
     }
 
     get_doc_task(index: string, docIndex: number) {
@@ -58,7 +56,7 @@ export class HttpRESTClientService {
             formData.append(key, body[key]);
         });
 
-        return this.http.post(this.url + '/process/' + index + '/document', formData);
+        return this.http.post(this.url + '/process/' + index + '/document', formData,  {headers: {'client-key': sessionStorage.getItem('client-id')}});
     }
 
     post_doc_initial_task(index: string,files, body) {
@@ -73,7 +71,7 @@ export class HttpRESTClientService {
             formData.append(key, body[key]);
         });
 
-        return this.http.post(this.url + '/process/' + index + '/initDocument', formData);
+        return this.http.post(this.url + '/process/' + index + '/initDocument', formData, {headers: {'client-key': sessionStorage.getItem('client-id')}});
     }
 
     getInitialFile(){

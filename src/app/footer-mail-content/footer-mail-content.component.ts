@@ -46,7 +46,7 @@ export class FooterMailContentComponent implements OnInit{
       this.wrzuc = true;
       this.zatwierdz = true;
       this.pobierz = true;
-    } else if(this.taskState === 'usertask4'){
+    } else if(this.taskState === 'dodawanieProduktow'){
 			this.wrzuc = true;
       this.zatwierdz = true;
       this.pobierzExcel = true;
@@ -122,7 +122,7 @@ export class FooterMailContentComponent implements OnInit{
     }
   }
 
-  if(this.taskState === 'usertask4'){
+  if(this.taskState === 'dodawanieProduktow'){
     if (fileInput.target.files && fileInput.target.files[0]) {
       this.httpClient.post_doc_task(this.taskId, fileInput.target.files, {}).subscribe();
     }

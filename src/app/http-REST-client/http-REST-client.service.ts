@@ -78,7 +78,8 @@ export class HttpRESTClientService {
         //TODO
         let headers= new HttpHeaders({
             'Content-Type': 'application/octet-stream',
-            'Accept': 'application/octet-stream'
+            'Accept': 'application/octet-stream',
+            'client-key': sessionStorage.getItem('client-id')
         })
       
       
@@ -90,7 +91,8 @@ export class HttpRESTClientService {
         //TODO
         let headers = new HttpHeaders({
             'Content-Type': 'application/octet-stream',
-            'Accept': 'application/octet-stream'
+            'Accept': 'application/octet-stream',
+            'client-key': sessionStorage.getItem('client-id')
         })
         return this.http.get(this.url + '/templates/order', { headers: headers, responseType: 'blob' });
     }
@@ -98,6 +100,7 @@ export class HttpRESTClientService {
     getMergedExcel(taskId: number){
         //TODO
         let headers = new HttpHeaders({
+            'client-key': sessionStorage.getItem('client-id'),
             'Content-Type': 'application/octet-stream',
             'Accept': 'application/octet-stream'
         })

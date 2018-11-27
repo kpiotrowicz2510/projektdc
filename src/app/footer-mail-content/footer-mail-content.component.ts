@@ -50,7 +50,7 @@ export class FooterMailContentComponent implements OnInit{
 			this.wrzuc = true;
       this.zatwierdz = true;
       this.pobierzExcel = true;
-		}else if (this.taskState === 'zatwierdzania'){
+		}else if (this.taskState === 'zatwierdzenie'){
 			this.zmien = true; //-> wrzuc
       this.zatwierdz = true;
       this.pobierzLastStep = true;
@@ -58,7 +58,7 @@ export class FooterMailContentComponent implements OnInit{
   }
 
   getCategories(){
-    return ['small'];
+    return ['small', 'big'];
   }
 
   passFurther() {

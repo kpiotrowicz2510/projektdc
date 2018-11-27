@@ -58,7 +58,7 @@ export class FooterMailContentComponent implements OnInit{
   }
 
   getCategories(){
-    return ['small'];
+    return ['small', 'big'];
   }
 
   passFurther() {

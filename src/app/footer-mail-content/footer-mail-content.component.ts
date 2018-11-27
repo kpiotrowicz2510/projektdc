@@ -85,8 +85,8 @@ export class FooterMailContentComponent implements OnInit{
 
   finishProcess() {
     const comment = (<HTMLInputElement>document.getElementById('uzasadnienieOdrzuceniaField')).value;
-    this.addComment(comment);
-    this.httpClient.post_complete_task(this.taskId, {"decision":"REJECT"}).subscribe(function(){
+      //this.addComment(comment);
+      this.httpClient.post_complete_task(this.taskId, { "decision": "REJECT", "comment": comment }).subscribe(function () {
       window.location.reload();
     });
   }

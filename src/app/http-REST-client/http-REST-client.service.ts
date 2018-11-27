@@ -97,7 +97,11 @@ export class HttpRESTClientService {
 
     getMergedExcel(taskId: number){
         //TODO
-        return this.http.get(this.url + '/process/' + taskId+'/mergedExcel');
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/octet-stream',
+            'Accept': 'application/octet-stream'
+        })
+        return this.http.get(this.url + '/process/' + taskId + '/mergedExcel', { headers: headers, responseType: 'blob' });
     }
 
     http_get(inUrl: string, callback) {

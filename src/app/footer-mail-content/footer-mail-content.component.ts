@@ -142,7 +142,23 @@ export class FooterMailContentComponent implements OnInit{
   }
 
   downloadFileMerged(){
-    this.httpClient.getMergedExcel(this.taskId).subscribe();
+      this.httpClient.getMergedExcel(this.taskId).subscribe(response => {
+          let ieEDGE = navigator.userAgent.match(/Edge/g);
+          let ie = navigator.userAgent.match(/.NET/g); // IE 11+
+          let oldIE = navigator.userAgent.match(/MSIE/g);
+
+          const blob = new Blob([response], { type: "application/octet-stream" })
+          let fileName: string = "orderMerged.xls";
+          if (ie || oldIE || ieEDGE) {
+              window.navigator.msSaveBlob(blob, fileName);
+          }
+          else {
+              let link = document.createElement('a');
+              link.href = window.URL.createObjectURL(blob);
+              link.download = fileName;
+              link.click();
+          }
+      });
   }
 
   handleUpload(fileInput) {

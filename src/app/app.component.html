@@ -7,7 +7,18 @@
 			<img src="/assets/img/logo-2.png" class="img-rounded" alt="logo" width="30" height="40">
 			Hurtownia kaktusów
 		</h2>
-		<app-authentication></app-authentication>
+		<div class="auth-container">
+			<div class="login-container" *ngIf="!clientIdSet">
+			  <form>
+				<input type="text" [(ngModel)]="loginData.login" placeholder="login" name="login" class="form-control" />
+				<input type="password" [(ngModel)]="loginData.password" placeholder="hasło" name="password" class="form-control" /><br />
+				<input type="submit" (click)="authenticate();" value="Zaloguj się" class="btn btn-primary login-button" />
+			  </form>
+			</div>
+			<div class="login-container" *ngIf="clientIdSet">
+			  Zalogowany jako <b id="userName">{{ loginData.login }}</b><button class="btn btn-primary logout-button" (click)="logout()">Wyloguj</button>
+			</div>
+		  </div>
 	</div>
 </div>
 <br>
@@ -16,16 +27,23 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 
-					<h4><span class="glyphicon glyphicon-envelope"></span> Zgłoszenia </h4>
+					<h4><span class="glyphicon glyphicon-envelope"></span> Zgłoszenia <button class="btn btn-warning" (click)='reload();'><span class="glyphicon glyphicon-repeat"></span></button></h4>
 
 				</div>
 				<div class="panel-body" style="max-height: 400px;overflow-y: scroll;">
 					<div class="list-group">
-						<app-list-of-mails></app-list-of-mails> <!-- PIERWSZY KOMPONENT-->
+						<div *ngIf="displayLoading" align='center' (click)="reload"><br>Wczytywanie ...</div> 
+
+<a href="#" class="list-group-item {{task.active}}" *ngFor = 'let task of tasks' (click)="selectMail(task)">
+	<h4 class="list-group-item-heading">{{task.taskDefinitionKey}}</h4>
+	<p class="list-group-item-text">{{task.taskId}}</p>
+</a>
 					</div>
 				</div>
 				<div class="panel-footer">
-					<app-footer-list-of-mails></app-footer-list-of-mails> <!-- DRUGI KOMPONENT-->
+					<div class="btn-group btn-group-justified">
+						<a href="#" (click)="acceptOffer()" class="btn btn-success">Pobierz nowe zgłoszenie</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -36,10 +54,43 @@
 					<h4><span class="glyphicon glyphicon-list"></span> Treść</h4>
 				</div>
 				<div class="panel-body" style="height: 400px;overflow-y: scroll;">
-					<app-mail-content></app-mail-content> <!-- TRZECI KOMPONENT-->
+					<div class="media">
+						<div class="media-left">
+								
+							
+						</div>
+						<div class="media-body">
+								<span class="glyphicon glyphicon-ok"></span> taskid: {{taskId}}
+							<h4>{{name}} {{surname}}</h4>
+							<p><span class="glyphicon glyphicon-user"></span> nadawca: <span class="label label-primary">{{mail}}</span>{{date}}</p>
+						</div>
+					</div>
+					
+					<hr>
+									 
+					<blockquote>
+						<p class="well" >{{content}}</p>
+						
+					</blockquote>
 				</div>
 				<div class="panel-footer">
-					<app-footer-mail-content></app-footer-mail-content> <!-- CZWARTY KOMPONENT-->
+					<input *ngIf="wrzuc" type="file" (change)="handleUpload($event)" href="#" class="btn btn-primary">
+
+<div class="btn-group btn-group-justified">
+	<a *ngIf="odrzuc" (click)="pokazUzasadnienie()" href="#" class="btn btn-primary">Odrzuć</a>
+	<a *ngIf="zmien" (click)="pokazWrzuc()" href="#" class="btn btn-primary">Zmień</a>
+	<a *ngIf="zatwierdz" (click)="passFurther()" href="#" class="btn btn-primary">Zatwierdź</a>
+	<a *ngIf="pobierz" (click)="downloadFile()" href="#" class="btn btn-primary">Pobierz plik</a>
+	<a *ngIf="pobierzExcel" (click)="downloadOrderFile()" href="#" class="btn btn-primary">Pobierz plik</a>
+	<a *ngIf="pobierzLastStep" (click)="downloadFileMerged()" href="#" class="btn btn-primary">Pobierz scalony plik</a>
+</div>
+
+<input *ngIf="uzasadnienieOdrzucenia" id="uzasadnienieOdrzuceniaField" type="text" size="35">
+
+<div class="btn-group btn-group-justified">
+	<a *ngIf="zakoncz" href="#" (click)="finishProcess()" class="btn btn-primary">Zakończ</a>
+</div>
+
 				</div>
 			</div>
 		</div>

@@ -37,6 +37,7 @@ export class AuthenticationComponent implements OnInit {
         sessionStorage.setItem('client-id', data);
         sessionStorage.setItem('user-name', this.loginData.login);
         this.clientIdSet = true;
+        window.location.reload();
       }
     });
   }

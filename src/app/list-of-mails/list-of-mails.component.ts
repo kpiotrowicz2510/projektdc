@@ -14,31 +14,10 @@ export class ListOfMailsComponent implements OnInit {
   listOfMails: any[] = [];
 
   constructor(private httpClient: HttpRESTClientService) {
-    this.loadEntries();
-  }
-
-  loadEntries(){
-    this.displayLoading = true;
-    this.httpClient.get_tasks().subscribe((data: Task[]) => {
-      this.tasks = data;
-      this.displayLoading = false;
-    }
-      );
     
   }
 
-  selectMail = function(mail){  
-
-    sessionStorage.setItem('taskId', mail.taskId);
-    sessionStorage.setItem('taskState', mail.taskDefinitionKey);
-    this.httpClient.currentTaskId = mail.taskId;
-    for (let i in this.tasks) {
-      this.tasks[i].active = "";
-    }
-
-    mail.active = 'active';
-    window.location.reload();
-  }
+  
   
   ngOnInit() {}
   
